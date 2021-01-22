@@ -1,0 +1,107 @@
+@import "../_variables";
+
+/// Source: https://css-tricks.com/snippets/sass/strip-unit-function/
+/// Remove the unit of a length
+/// @param {Number} $number - Number to remove unit from
+/// @return {Number} - Unitless number
+@function strip-unit($number) {
+    @if type-of($number)=='number'and not unitless($number) {
+        @return $number / ($number * 0 + 1);
+    }
+
+    @return $number;
+}
+
+$skew: 15deg;
+
+.services-row {
+    
+
+    display: inline-block;
+    width: 100%;
+    padding: 1em 0;
+
+    .service-item-wrapper {
+        position: relative;
+        float: left;
+        width: 200px;
+        height: 250px;
+        overflow: hidden;
+        transform: skew($skew) translateX(strip-unit($skew) + 2%);
+
+        background-color: $colorPlaceholder;
+        border-radius: $borderRadTiny;
+        transition: all $animSpeedNormal*1s $cubicNorm;
+        
+        &:not(:first-of-type) {
+            margin-left: 2em;
+        }
+
+        &:hover {
+            cursor: pointer;
+            transform: skew($skew) translateX(strip-unit($skew) + 2%) scale(1.05);
+            box-shadow: $shadowNormal;
+        }
+
+        &:active {
+            transform: skew($skew) translateX(strip-unit($skew) + 2%) scale(0.96);
+
+        }
+
+        .service-background {
+            position: absolute;
+            top: 0;
+            left: 50%;
+
+            height: 100%;
+            width: 200%;
+
+            background-color: $colorPlaceholder;
+            background-size: cover;
+            background-position: center;
+
+            transform: skew(-$skew) translateX(-50%);
+        }
+
+        .service-name {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        
+            width: 100%;
+        
+            display: block;
+            padding: 1em 0.5em;
+            background-color: $colorPrimaryDark;
+            text-align: center;
+            pointer-events: none;
+        
+            p {
+                font-family: 'Whitney', 'Poppins', sans-serif;
+                font-weight: 700;
+                font-size: 0.95em;
+                transform: skew(-$skew);
+                pointer-events: none;
+        
+                &::selection {
+                    background: transparent;
+                }
+            }
+        
+            img {
+                
+                pointer-events: none;
+                display: inline-block;
+                vertical-align: middle;
+                width: 24px;
+                height: 24px;
+                margin-right: 0.3em;
+        
+                &::selection {
+                    background: transparent;
+                }
+            }
+        }
+    }
+}
+

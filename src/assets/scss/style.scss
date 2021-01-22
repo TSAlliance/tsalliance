@@ -1,0 +1,113 @@
+@import "_variables";
+@import "fonts";
+
+/*
+[]========== General Styling ==========[]
+*/
+* {
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+body {
+    background: $gradientBox;
+}
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+    font-family: 'Whitney', 'Poppins', sans-serif;
+    font-weight: 500;
+    color: $colorWhite;
+}
+
+#wrapper {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+.content-container {
+    display: block;
+    width: 1200px;
+    padding: 0 $windowPad;
+}
+
+::selection {
+    background-color: rgba($color: $colorAccent, $alpha: 0.5);
+    color: $colorWhite;
+}
+
+
+/*
+[]========== Headlines ==========[]
+*/
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 0;
+    font-weight: 700;
+}
+
+h4, h5, h6 {
+    font-weight: 600;
+}
+
+
+h1 {
+    font-size: 3em;
+}
+h2 {
+    font-size: 2.6em;
+}
+h3 {
+    font-size: 2.2em;
+}
+h4 {
+    font-size: 1.8em;
+}
+h5 {
+    font-size: 1.5em;
+}
+h6 {
+    font-size: 1.1em;
+}
+
+/*
+[]========== Paragraphs ==========[]
+*/
+p {
+    font-size: 1.1em;
+    letter-spacing: 0.3px;
+}
+
+
+/*
+[]========== Layout Tables ==========[]
+*/
+.layout-table {
+    display: table;
+    width: 100%;
+
+    .layout-col {
+        display: table-cell;
+        vertical-align: top;
+    }
+}
+
+/*
+[]=========== Scrollbar ===========[]
+*/
+/* width */
+::-webkit-scrollbar {
+    height: 0.3em;
+    width: 0.3em;
+}
+  
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: $colorPlaceholder;
+    border-radius: 1em;
+}
