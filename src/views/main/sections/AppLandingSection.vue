@@ -97,16 +97,20 @@ button {
 @media screen and (max-width: 950px) {
     .landing-title {
         font-size: 0.8em;
+        
     }
 }
+
 @media screen and (max-width: 580px) {
     .landing-title {
         font-size: 0.55em;
+        top: 47% !important;
     }
 }
 @media screen and (max-width: 480px) {
     .landing-title {
         font-size: 0.45em;
+        top: 45% !important;
     }
 }
 </style>
