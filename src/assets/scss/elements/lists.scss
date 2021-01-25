@@ -15,8 +15,6 @@
 $skew: 15deg;
 
 .services-row {
-    
-
     display: inline-block;
     width: 100%;
     padding: 1em 0;
@@ -41,6 +39,10 @@ $skew: 15deg;
             cursor: pointer;
             transform: skew($skew) translateX(strip-unit($skew) + 2%) scale(1.05);
             box-shadow: $shadowNormal;
+
+            .service-background {
+                transform: skew(-$skew) translateX(-50%) scale(1.1);
+            }
         }
 
         &:active {
@@ -61,6 +63,7 @@ $skew: 15deg;
             background-position: center;
 
             transform: skew(-$skew) translateX(-50%);
+            transition: all $animSpeedNormal*1s $cubicNorm;
         }
 
         .service-name {

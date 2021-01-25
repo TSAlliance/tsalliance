@@ -1,5 +1,6 @@
 @import "_variables";
 @import "fonts";
+@import "elements/buttons.scss";
 
 /*
 []========== General Styling ==========[]
@@ -7,10 +8,6 @@
 * {
     margin: 0 auto;
     box-sizing: border-box;
-}
-
-body {
-    background: $gradientBox;
 }
 
 html,
@@ -27,7 +24,6 @@ body {
     height: 100%;
     width: 100%;
     overflow: hidden;
-    overflow-y: auto;
 }
 
 .content-container {
@@ -40,7 +36,6 @@ body {
     background-color: rgba($color: $colorAccent, $alpha: 0.5);
     color: $colorWhite;
 }
-
 
 /*
 []========== Headlines ==========[]
@@ -110,4 +105,25 @@ p {
 ::-webkit-scrollbar-thumb {
     background: $colorPlaceholder;
     border-radius: 1em;
+}
+
+/*
+[]=========== Media Query ===========[]
+*/
+@media screen and (max-width: 1200px) {
+    .content-container {
+        width: 850px;
+    }
+}
+
+@media screen and (max-width: 950px) {
+    .content-container {
+        width: 540px;
+    }
+}
+@media screen and (max-width: 580px) {
+    .content-container {
+        width: 100%;
+        padding: 0 1em;
+    }
 }
