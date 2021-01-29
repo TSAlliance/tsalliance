@@ -1,5 +1,7 @@
-import HomeView from '@/views/main/HomeView.vue'
+import { RouteRecordRaw } from 'vue-router'
+import AppHomeView from '@/views/main/AppHomeView.vue'
 
-export default [
-    { name: 'home', path: '/', component: HomeView }
+const routes: Array<RouteRecordRaw> = [
+     { name: "home", path: "/", component: AppHomeView }
 ]
+export default routes;

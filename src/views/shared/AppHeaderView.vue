@@ -1,17 +1,11 @@
 <template>
     <div class="header-wrapper">
-        <img id="desktop-logo" src="@/assets/images/branding/ts_alliance_logo.svg" alt="Alliance Logo">
-        <img id="mobile-logo" src="@/assets/images/branding/ts_logo.svg" alt="Alliance Logo">
+        <div class="content-container container-fluid">
+            <img id="desktop-logo" src="@/assets/images/branding/ts_alliance_logo.svg" alt="Alliance Logo">
+            <img id="mobile-logo" src="@/assets/images/branding/ts_logo.svg" alt="Alliance Logo">
+        </div>
     </div>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-export default defineComponent({
-
-})
-</script>
 
 <style lang="scss" scoped>
 @import "@/assets/scss/_variables.scss";
@@ -36,15 +30,23 @@ export default defineComponent({
     }
 }
 
-@media screen and (max-width: 950px) {
+@media screen and (max-width: 850px) {
     .header-wrapper {
-        padding: $boxPad;
+        padding: $windowPad/2;
 
         #desktop-logo {
             display: none;
         }
         #mobile-logo {
             display: inline-block !important;
+        }
+    }
+}
+@media screen and (max-width: 540px) {
+    .header-wrapper {
+
+        img {
+            height: 45px;
         }
     }
 }

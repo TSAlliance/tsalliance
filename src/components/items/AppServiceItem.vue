@@ -23,8 +23,8 @@ export default defineComponent({
 
 .service-item {
     display: inline-block;
-    width: 80px;
-    height: 80px;
+    width: 90px;
+    height: 90px;
     border-radius: $borderRadNormal;
     margin: 1em;
     overflow: hidden;
@@ -33,7 +33,6 @@ export default defineComponent({
     &:hover {
         cursor: pointer;
         transform: scale(1.05);
-        box-shadow: $shadowNormal;
     }
 
     &:active {
@@ -48,15 +47,15 @@ export default defineComponent({
 
 @media screen and (max-width: 950px) {
     .service-item {
-        width: 70px;
-        height: 70px;
+        width: 80px;
+        height: 80px;
         margin: 0.8em;
     }
 }
 @media screen and (max-width: 580px) {
     .service-item {
-        width: 60px;
-        height: 60px;
+        width: 65px;
+        height: 65px;
         margin: 0.5em;
     }
 }

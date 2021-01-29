@@ -50,7 +50,7 @@
     }
 }
 
-@media screen and (max-width: 950px) {
+@media screen and (max-width: 850px) {
     
 }
 </style>
