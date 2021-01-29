@@ -1,5 +1,5 @@
 <template>
-    <section id="landing-section" :style="'background-image: url('+require('@/assets/images/background/alliance_background.png')+');'">
+    <section id="landing-section" :style="'background-image: url('+require('@/assets/images/background/alliance_background.jpeg')+');'">
         <div class="content-container landing-title">
             <h5>Welcome to</h5>
             <h1>TSAlliance</h1>
