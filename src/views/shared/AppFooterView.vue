@@ -3,7 +3,7 @@
         <div class="content-container">
             <ul>
                 <li>&copy; {{ new Date().getFullYear() }} TSAllianceEU</li>
-                <li><a href="https://easternexploration.de/?page_id=107" target="_blank">Impressum</a></li>
+                <li><a href="https://easternexploration.de/?page_id=107" rel="noreferrer" target="_blank">Impressum</a></li>
             </ul>
         </div>
     </div>
