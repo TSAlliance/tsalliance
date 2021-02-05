@@ -13,5 +13,10 @@ export default [
         name: "Easternexploration",
         banner: require("@/assets/images/services/easternexploration.jpeg"),
         url: "https://easternexploration.de"
+    },
+    {
+        name: "Urbexmap",
+        banner: require("@/assets/images/services/urbexmap.jpeg"),
+        url: "https://urbexmap.net"
     }
 ]
