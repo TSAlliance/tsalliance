@@ -15,8 +15,8 @@ export class Account {
      * @param {String} username User's username
      * @param {String} password User's password
      */
-    static async signInWithCredentials(username, password) {
-        const result = await Api.getInstance().post("/auth/signin", {username, password})
+    static async signInWithCredentials(username, password, handleError = false) {
+        const result = await Api.getInstance().post("/auth/signin", {username, password}, handleError)
 
         if(result instanceof TrustedError) {
             return result
@@ -94,7 +94,19 @@ export class Account {
      * Loads current logged in user's data by sending GET request
      */
     static async loadAccount(memberId) {
-        let result = await Api.getInstance().get("/members/"+memberId)
+        let result = await Api.getInstance().get("/members/"+memberId, {}, true)
+        if(result instanceof TrustedError) {
+            return result
+        }
+
+        return result.data
+    }
+
+    /**
+     * Loads current logged in user's data by sending GET request
+     */
+    static async reloadAccount() {
+        let result = await Api.getInstance().get("/members/@me")
         if(result instanceof TrustedError) {
             return result
         }

@@ -19,15 +19,15 @@ export class Api {
      * @param query Query parameters
      * @returns {Api.Result} Api Result
      */
-    async get(path, query = {}) {
+    async get(path, query = {}, handleError = false) {
         return new Promise((resolve) => {
             axios.request({
                 baseURL: this.getApiUrl(),
                 headers: { 'Authorization': "Bearer "+store.state.account.session },
                 url: path + (query && Object.keys(query).length > 0 ? "?" + this.objectToUrlQuery(query) : ""),
                 method: 'GET'
-            }).then((response) => resolve(this.transformAxiosResponse(response)))
-            .catch((error) => resolve(this.transformAxiosError(error)))
+            }).then((response) => resolve(this.transformAxiosResponse(response, handleError)))
+            .catch((error) => resolve(this.transformAxiosError(error, handleError)))
         })
     }
 
@@ -37,7 +37,7 @@ export class Api {
      * @param data Body data in json
      * @returns {Api.Result} Api Result
      */
-    async post(path, data = {}) {
+    async post(path, data = {}, handleError = false) {
         return new Promise((resolve) => {
             axios.request({
                 baseURL: this.getApiUrl(),
@@ -45,8 +45,8 @@ export class Api {
                 data,
                 url: path,
                 method: 'POST'
-            }).then((response) => resolve(this.transformAxiosResponse(response)))
-            .catch((error) => resolve(this.transformAxiosError(error)))
+            }).then((response) => resolve(this.transformAxiosResponse(response, handleError)))
+            .catch((error) => resolve(this.transformAxiosError(error, handleError)))
         })
     }
 
@@ -56,7 +56,7 @@ export class Api {
      * @param query Query parameters
      * @returns {Api.Result} Api Result
      */
-    async put(path, data = {}) {
+    async put(path, data = {}, handleError = false) {
         return new Promise((resolve) => {
             axios.request({
                 baseURL: this.getApiUrl(),
@@ -64,8 +64,8 @@ export class Api {
                 data,
                 url: path,
                 method: 'PUT'
-            }).then((response) => resolve(this.transformAxiosResponse(response)))
-            .catch((error) => resolve(this.transformAxiosError(error)))
+            }).then((response) => resolve(this.transformAxiosResponse(response, handleError)))
+            .catch((error) => resolve(this.transformAxiosError(error, handleError)))
         })
     }
 
@@ -75,7 +75,7 @@ export class Api {
      * @param query Query parameters
      * @returns {Api.Result} Api Result
      */
-    async delete(path, data = {}) {
+    async delete(path, data = {}, handleError = false) {
         return new Promise((resolve) => {
             axios.request({
                 baseURL: this.getApiUrl(),
@@ -83,8 +83,8 @@ export class Api {
                 data,
                 url: path,
                 method: 'DELETE'
-            }).then((response) => resolve(this.transformAxiosResponse(response)))
-            .catch((error) => resolve(this.transformAxiosError(error)))
+            }).then((response) => resolve(this.transformAxiosResponse(response, handleError)))
+            .catch((error) => resolve(this.transformAxiosError(error, handleError)))
         })
     }
 
@@ -92,7 +92,7 @@ export class Api {
      * Transform an axios error to proper api result object
      * @param error axios error
      */
-    transformAxiosError(error) {
+    transformAxiosError(error, handleError = false) {
         let trustedError = undefined
         if(error.response) {
             const responseBody = error.response.data
@@ -101,20 +101,22 @@ export class Api {
             trustedError = new TrustedError(500, "SERVICE_UNAVAILABLE", "", "", Date.now())
         }
 
-        if(trustedError.errorId == "SESSION_EXPIRED" 
-            || trustedError.errorId == "UNKNOWN_AUTH_METHOD" 
-            || trustedError.errorId == "AUTH_REQUIRED"
-            || trustedError.errorId == "UNKNOWN_AUTH_METHOD") {
-            // TODO: Show popup showing that session is expired
-            if(router.currentRoute.name != 'home') router.push({ name: 'home' })
-            Account.logout(true)
-            console.log("TODO: Session expired")
-        }
-        if(trustedError.errorId == "INVALID_ACCOUNT" ) {
-            // TODO: Show popup showing that account does not exist anymore
-            if(router.currentRoute.name != 'home') router.push({ name: 'home' })
-            Account.logout(true)
-            console.log("TODO: Acount blocked")
+        if(handleError) {
+            if(trustedError.errorId == "SESSION_EXPIRED" 
+                || trustedError.errorId == "UNKNOWN_AUTH_METHOD" 
+                || trustedError.errorId == "AUTH_REQUIRED"
+                || trustedError.errorId == "UNKNOWN_AUTH_METHOD") {
+                // TODO: Show popup showing that session is expired
+                if(router.currentRoute.name != 'home') router.push({ name: 'home' })
+                Account.logout(true)
+                console.log("TODO: Session expired")
+            }
+            if(trustedError.errorId == "INVALID_ACCOUNT" ) {
+                // TODO: Show popup showing that account does not exist anymore
+                if(router.currentRoute.name != 'home') router.push({ name: 'home' })
+                Account.logout(true)
+                console.log("TODO: Acount blocked")
+            }
         }
 
         return trustedError
@@ -124,8 +126,9 @@ export class Api {
      * Transform an axios response to proper api result object
      * @param response Axios response object
      */
-    transformAxiosResponse(response) {
+    transformAxiosResponse(response, handleError = false) {
         const responseBody = response.data
+        handleError
 
         if(responseBody.data) {
             return new ResultSingleton(responseBody.statusCode, responseBody.data)

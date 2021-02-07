@@ -167,7 +167,7 @@ export default {
             }
 
             setTimeout(() => {
-                this.$account.signInWithCredentials(this.vuelidate.username.$model, this.vuelidate.password.$model).then((response) => {
+                this.$account.signInWithCredentials(this.vuelidate.username.$model, this.vuelidate.password.$model, false).then((response) => {
                     if(response instanceof TrustedError) {
                         this.error = response.message
                     } else {
