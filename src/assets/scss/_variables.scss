@@ -4,7 +4,7 @@
 
 $colorPrimary: #262D37;
 $colorPrimaryDark: #222831;
-$colorPrimaryDarker: #20262c;
+$colorPrimaryDarker: #1e232b;
 $colorDark: #1c2129;
 
 $colorAccent: #e05858;
@@ -19,8 +19,9 @@ $colorSuccessDark: #416e3a;
 
 $colorInfo: #277cad;
 
-$colorPurple: #45425f;
-$colorPink: #d8bbd7;
+$colorPurple: #090C2F;
+$colorPink: #BAAFE3;
+
 
 /*
 []========== Animations ==========[]
@@ -45,6 +46,8 @@ $borderRadLarge: 12px;
 /*
 []========== Shadows ==========[]
 */
+$shadowButton: 1px 1px 3px 0px rgba(0,0,0,0.2);
+$shadowForm: 3px 3px 6px 0px rgba(0,0,0,0.3);
 
 /*
 []========== Pads and Margs ==========[]

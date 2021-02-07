@@ -1,16 +1,27 @@
 <template>
-    <app-spa-layout></app-spa-layout>
+    <transition name="anim_dialog" mode="out-in">
+        <app-splash-screen></app-splash-screen>
+    </transition>
+    <transition name="anim_state_change" mode="out-in">
+        <component :is="getLayout" v-if="$store.state.appIsReady"></component>
+    </transition>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
+<script>
+import AppSplashScreen from '@/views/shared/AppSplashScreenView.vue'
 import AppSpaLayout from "@/layouts/AppSPALayout.vue"
 
-export default defineComponent({
+export default {
     components: {
-        AppSpaLayout
+        AppSpaLayout,
+        AppSplashScreen
+    },
+    computed: {
+        getLayout() {
+            return this.$route.meta?.layout || AppSpaLayout;
+        }
     }
-})
+}
 </script>
 
 <style lang="scss">

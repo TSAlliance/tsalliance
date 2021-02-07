@@ -1,8 +1,15 @@
 <template>
     <div class="header-wrapper">
         <div class="content-container container-fluid">
-            <img id="desktop-logo" src="@/assets/images/branding/ts_alliance_logo.svg" alt="Alliance Logo">
-            <img id="mobile-logo" src="@/assets/images/branding/ts_logo.svg" alt="Alliance Logo">
+            <div class="header-section branding-section">
+                <img id="desktop-logo" src="@/assets/images/branding/ts_alliance_logo_dark.svg" alt="Alliance Logo">
+                <img id="mobile-logo" src="@/assets/images/branding/ts_logo_dark.svg" alt="Alliance Logo">
+            </div>
+
+            <div class="header-section profile-section" v-if="$store.state.account.isLoggedIn">
+                <app-avatar class="avatar-m" @click="$router.push({name: 'account'})" style="cursor: pointer;">{{ $store.state.account.name }}</app-avatar>
+            </div>
+            
         </div>
     </div>
 </template>
@@ -11,12 +18,24 @@
 @import "@/assets/scss/_variables.scss";
 
 .header-wrapper {
-    display: block;
+    display: inline-block;
     position: fixed;
     top: 0;
     width: 100%;
     z-index: 100;
-    padding: $windowPad;
+
+    .content-container {
+        padding: $windowPad;
+    }
+
+    .header-section {
+        display: inline-block;
+        vertical-align: middle;
+        
+        &:last-of-type:not(:first-of-type) {
+            float: right;
+        }
+    }
 
     img {
         display: inline-block;
@@ -32,8 +51,6 @@
 
 @media screen and (max-width: 850px) {
     .header-wrapper {
-        padding: $windowPad/2;
-
         #desktop-logo {
             display: none;
         }

@@ -1,18 +1,20 @@
 <template>
     <div class="layout-spa">
         <app-header-view></app-header-view>
-        <router-view></router-view>
+        <router-view custom v-slot="{Component}">
+            <transition name="anim_state_change" mode="out-in">
+                <component :is="Component"></component>
+            </transition>
+        </router-view>
     </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-
+<script lang="js">
 import AppHeaderView from "@/views/shared/AppHeaderView.vue"
 
-export default defineComponent({
+export default {
     components: {
         AppHeaderView
     }
-})
+}
 </script>

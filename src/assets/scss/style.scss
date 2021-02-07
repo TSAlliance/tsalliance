@@ -1,5 +1,7 @@
 @import "fonts";
 @import "variables";
+@import 'animations';
+@import "elements/buttons.scss";
 
 /**
 []=============================[]
@@ -10,7 +12,7 @@
     margin: 0 auto;
     padding: 0;
     box-sizing: border-box;
-    font-size: 1em;
+    font-size: 0.995em;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
@@ -91,6 +93,154 @@ h6 {
 
 /**
 []=============================[]
+          Sections
+[]=============================[]
+*/
+.landing-section {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100vh;
+
+    background-image: url(assets/images/background/alliance_background.svg);
+    background-attachment: scroll;
+    background-position: center;
+    background-size: cover;
+}
+
+/**
+[]=============================[]
+          Layout
+[]=============================[]
+*/
+.layout-table {
+    position: relative;
+    display: table;
+    width: 100%;
+
+    .layout-col {
+        display: table-cell;
+    }
+}
+
+/**
+[]=============================[]
+          Image-Sizes
+[]=============================[]
+*/
+img {
+    pointer-events: none;
+    vertical-align: middle;
+}
+
+/*
+[]========== Icons ==========[]
+*/
+.icon {
+    display: inline-block;
+    vertical-align: middle;
+    pointer-events: none;
+    transition: all $animSpeedFast*1s $cubicNorm;
+
+    &::selection {
+        background: none;
+    }
+}
+.icon-xs {
+    width: 14px;
+    height: 14px;
+}
+.icon-s {
+    width: 24px;
+    height: 24px;
+}
+.icon-m {
+    width: 32px;
+    height: 32px;
+}
+.icon-l {
+    width: 40px;
+    height: 40px;
+}
+
+/*
+[]=========== Message Box ===========[]
+*/
+.message-box {
+    display: block;
+    border-radius: $borderRadSmall;
+    background-color: $colorPrimaryDarker;
+    margin: 0.5em 0;
+
+    font-size: 0.9em;
+    padding: 0.8em;
+    text-align: left;
+
+    &.message-error {
+        background-color: $colorAccent;
+    }
+}
+
+/*
+[]========== Horizontal line ==========[]
+*/
+hr {
+    appearance: none;
+    border: none;
+    background-color: $colorPlaceholder;
+    display: block;
+    height: 2px;
+    width: 100%;
+    border-radius: 8px;
+    opacity: 0.3;
+    margin: 1em 0;
+
+    &.half {
+        width: 50%;
+        margin: 1em auto;
+    }
+}
+
+/*
+[]=========== Links ===========[]
+*/
+a {
+    position: relative;
+    text-decoration: none;
+    font-weight: inherit;
+    color: inherit;
+    transition: all 0.2s $cubicNorm;
+    letter-spacing: inherit;
+    color: $colorAccentLight;
+    cursor: pointer;
+
+    &::after {
+        content: "";
+        position: absolute;
+        bottom: -1px;
+        left: 50%;
+        width: 0%;
+        opacity: 0;
+        height: 2px;
+        border-radius: 4px;
+        background-color: $colorAccentLight;
+
+        transform: translateX(-50%);
+        transition: all 0.2s $cubicNorm;
+    }
+
+    &:hover {
+        opacity: 1;
+
+        &::after {
+            width: 100%;
+            opacity: 1;
+        }
+    }
+}
+
+/**
+[]=============================[]
           Scrollbars
 []=============================[]
 */
@@ -126,6 +276,7 @@ h6 {
 @media screen and (max-width: 540px) {
     .content-container {
         width: 100%;
-        padding: 0 1em;
+        padding: 0 1.5em;
+        
     }
 }

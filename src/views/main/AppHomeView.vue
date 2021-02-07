@@ -1,9 +1,12 @@
 <template>
-    <section id="landing-title" :style="'background-image: url('+require('@/assets/images/background/alliance_background.jpeg')+');'">
+    <section id="landing-title" class="landing-section">
 
         <div class="content-container title">
-            <h2>Welcome to the</h2>
+            <h2>Welcome{{ $store.state.account.isLoggedIn ? ", " + $store.state.account.name + "," : "" }} at</h2>
             <h1>TSAlliance</h1>
+            <div class="join-section" v-if="!$store.state.account.isLoggedIn">
+                <button class="btn btn-primary btn-l btn-light" @click="$router.push({name: 'authIndex'})">Jetzt beitreten</button>
+            </div>
         </div>
 
         <div class="content-container nopad services-row">
@@ -16,16 +19,14 @@
     </section>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-import services from "@/config/services.ts"
+<script lang="js">
+import services from "@/config/services.js"
 
 import AppHorizontalList from '@/components/list/AppHorizontalList.vue'
 import AppServiceAvatar from '@/components/items/AppServiceItem.vue'
 import AppFooter from '@/views/shared/AppFooterView.vue'
 
-export default defineComponent({
+export default {
     computed: {
         services() {
             return services;
@@ -36,23 +37,15 @@ export default defineComponent({
         AppServiceAvatar,
         AppFooter
     }
-})
+}
 </script>
 
 <style lang="scss" scoped>
 @import "@/assets/scss/_variables.scss";
 
-section {
-    height: 100vh;
-}
-
 section#landing-title {
     position: relative;
     text-align: center;
-
-    background-attachment: scroll;
-    background-position: center;
-    background-size: cover;
 
     h1 {
         font-size: 6em;
@@ -69,7 +62,12 @@ section#landing-title {
         position: absolute;
         top: 50%;
         left: 50%;
-        transform: translate(-50%,-170%);
+        transform: translate(-50%,-110%);
+
+        .join-section {
+            margin-top: 2.5em;
+            text-align: center;
+        }
     }
 }
 
@@ -84,20 +82,35 @@ section#landing-title {
 @media screen and (max-width: 850px) {
     section#landing-title .title {
         font-size: 0.8em;
-        top: 47.5% !important;
+        top: 50% !important;
+
+        .join-section {
+            font-size: 1.2em;
+            margin-top: 2.5em;
+        }
     }
 }
 
 @media screen and (max-width: 540px) {
     section#landing-title .title {
         font-size: 0.55em;
-        top: 44.5% !important;
+        top: 50% !important;
+
+        .join-section {
+            font-size: 1.5em !important;
+            margin-top: 1.5em !important;
+        }
     }
 }
 @media screen and (max-width: 480px) {
     section#landing-title .title {
         font-size: 0.45em;
-        top: 43.8% !important;
+        top: 50% !important;
+
+        .join-section {
+            font-size: 1.4em !important;
+            margin-top: 1.5em !important;
+        }
     }
 }
 </style>

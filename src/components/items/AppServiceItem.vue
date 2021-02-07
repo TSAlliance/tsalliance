@@ -4,9 +4,8 @@
     </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-export default defineComponent({
+<script lang="js">
+export default {
     props: {
         service: Object
     },
@@ -15,7 +14,7 @@ export default defineComponent({
             window.open(this.service?.url, "_blank")
         }
     }
-})
+}
 </script>
 
 <style lang="scss" scoped>
