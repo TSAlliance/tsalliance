@@ -7,7 +7,13 @@
         </div>
         <div class="layout-col">
             <div class="col-container" id="layout-content">
-                <router-view></router-view>
+                <div class="content-container">
+                    <router-view custom v-slot="{Component}">
+                        <transition name="anim_page_change" mode="out-in">
+                            <component :is="Component"></component>
+                        </transition>
+                    </router-view>
+                </div>
             </div>
         </div>
     </div>
@@ -49,8 +55,10 @@ export default {
 
     .content-container {
         margin-left: 0;
-        width: 650px;
+        padding: 0;
+        width: 650px !important;
     }
+
     .layout-col {
         display: table-cell;
         overflow-y: auto;
