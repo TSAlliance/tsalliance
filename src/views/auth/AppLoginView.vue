@@ -86,14 +86,13 @@
                 </div>
             </div>
         </div>
-        <div class="form-footer">
+        <div class="form-footer" v-if="!shouldRedirect">
             <p><router-link custom v-slot="{navigate}" :to="{name: 'authAction', params: { action: 'register' }}"><a @click="navigate">Du hast eine Einladung?</a></router-link></p>
         </div>
     </div>
 </template>
 
 <script>
-import loaderData from '@/assets/animated/loader_light.json'
 import { Module } from '@/models/module';
 import { TrustedError } from '@/models/api';
 import { Account } from '@/models/account'
@@ -112,12 +111,12 @@ export default {
             error: undefined,
             module: undefined,
             loading: true,
-            loaderData
+            redirect: undefined
         }
     },
     computed: {
         shouldRedirect() {
-            return !!this.$route.query.redirect
+            return !!this.redirect
         },
         formIsReady() {
             if(this.shouldRedirect) {
@@ -128,6 +127,12 @@ export default {
         }
     },
     methods: {
+        setupRedirect() {
+            let query = Object.assign({}, this.$route.query)
+            this.redirect = query.redirect || undefined
+            delete query.redirect
+            this.$router.replace({query})
+        },
         cancelRedirect() {
             this.redirectToModule(false)
         },
@@ -196,9 +201,11 @@ export default {
         }
     },
     mounted() {
+        this.setupRedirect()
+
         if(this.shouldRedirect) {
             // Request module by app id
-            const moduleID = this.$route.query.redirect
+            const moduleID = this.redirect
             Module.findModule(moduleID).then((result) => {
                 if(result instanceof Module) {
                     this.module = result
