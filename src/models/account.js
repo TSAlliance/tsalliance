@@ -113,5 +113,16 @@ export class Account {
 
         return result.data
     }
+
+    /**
+     * Send a request to register new user
+     * @param {String} username User's username
+     * @param {String} password User's password
+     * @param {String} email User's email
+     * @param {String} invite User's invite
+     */
+    static async registerAccount(username, password, email, invite, handleError = false) {
+        return  await Api.getInstance().post("/auth/signup", {name: username, password, email, invite}, handleError)
+    }
     
 }
