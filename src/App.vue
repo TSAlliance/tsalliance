@@ -1,5 +1,5 @@
 <template>
-    <transition name="anim_dialog" mode="out-in">
+    <transition name="anim_dialog" mode="out-in" appear>
         <app-splash-screen></app-splash-screen>
     </transition>
     <transition name="anim_state_change" mode="out-in">
