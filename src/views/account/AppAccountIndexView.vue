@@ -6,6 +6,7 @@
             <div class="layout-table">
                 <div class="layout-col">
                     <span><img class="icon icon-xs" src="@/assets/icons/upload.svg" alt=""></span>
+                    
                     <img id="user_avatar" :src="$store.state.account.avatarUrl" alt="">
                 </div>
                 <div class="layout-col">

@@ -21,9 +21,9 @@ router.beforeEach((to, from, next) => {
         if(!isVerified) {
           router.push({name: 'authIndex'})
         } 
+      }).finally(() => {
         store.state.appIsReady = true
       })
-
       next()
     }
     
