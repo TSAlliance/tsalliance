@@ -7,7 +7,7 @@
             </div>
 
             <div class="header-section profile-section" v-if="$store.state.account.isLoggedIn">
-                <app-avatar class="avatar-m" @click="$router.push({name: 'account'})" style="cursor: pointer;">{{ $store.state.account.name }}</app-avatar>
+                <app-avatar class="avatar-m avatar-round" @click="$router.push({name: 'account'})" style="cursor: pointer;">{{ $store.state.account.name }}</app-avatar>
             </div>
             
         </div>

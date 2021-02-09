@@ -5,9 +5,11 @@
         <div class="section-box">
             <div class="layout-table">
                 <div class="layout-col">
-                    <span><img class="icon icon-xs" src="@/assets/icons/upload.svg" alt=""></span>
+
+                    <app-avatar-changable :avatar="$store.state.account.avatar" class="avatar-xxl avatar-dubbed"></app-avatar-changable>
+                    <!--<span><img class="icon icon-xs" src="@/assets/icons/upload.svg" alt=""></span>
                     
-                    <img id="user_avatar" :src="$store.state.account.avatarUrl" alt="">
+                    <img id="user_avatar" :src="$store.state.account.avatarUrl" alt="">-->
                 </div>
                 <div class="layout-col">
                     <div class="profile-info">
@@ -53,13 +55,15 @@ import { ref } from 'vue'
 import { useVuelidate } from '@vuelidate/core'
 import { required, minLength, maxLength, alphaNum, email } from '@vuelidate/validators'
 import ActionInputBox from '@/components/input/ActionInputBox.vue'
+import AppAvatarChangable from '../../components/image/AppAvatarChangable.vue'
 
 export default {
     setup() {
         return { ...setupVuelidate() }
     },
     components: {
-        ActionInputBox
+        ActionInputBox,
+        AppAvatarChangable
     },
     data() {
         return {
@@ -133,6 +137,7 @@ function resetForm(form, initForm) {
 
 <style lang="scss" scoped>
 @import "@/assets/scss/_variables.scss";
+
 .layout-table {
     .layout-col {
         vertical-align: middle;

@@ -8,8 +8,9 @@ import formatDate from 'dateformat'
 import VueLottiePlayer from 'vue-lottie-player'
 
 // Import models
-import { Account } from '@/models/account.js'
+import { Account } from '@/models/account'
 import { Module } from '@/models/module'
+import { Modal } from '@/models/modal'
 
 // Import utils 
 import { generateId } from '@/utils/generatorUtil'
@@ -17,7 +18,7 @@ import { generateId } from '@/utils/generatorUtil'
 // Import global Components
 import AppLoaderComp from '@/components/loader/AppLoaderComp.vue'
 import AppButtonComp from '@/components/button/AppButtonComp.vue'
-import AppAvatarComp from '@/components/image/AppAvatarComp.vue'
+import AppAvatarStatic from '@/components/image/AppAvatarStatic.vue'
 
 // Initialize storage
 store.commit('initialiseStore')
@@ -27,6 +28,7 @@ const app = createApp(App)
 app.config.globalProperties.$env = process.env
 app.config.globalProperties.$account = Account
 app.config.globalProperties.$module = Module
+app.config.globalProperties.$modal = Modal
 app.config.globalProperties.$isProduction = process.env.NODE_ENV === 'production'
 
 app.use(store)
@@ -38,7 +40,7 @@ app.use(VueLottiePlayer)
 // Register global components
 app.component('app-button', AppButtonComp)
 app.component('app-loader', AppLoaderComp)
-app.component('app-avatar', AppAvatarComp)
+app.component('app-avatar', AppAvatarStatic)
 
 // Register global methods
 app.mixin({
