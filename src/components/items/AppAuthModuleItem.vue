@@ -2,7 +2,7 @@
     <div class="auth-module-item">
         <div class="layout-table">
             <div class="layout-col avatar-col">
-                <app-avatar class="avatar-m" :avatar="avatar"></app-avatar>
+                <app-avatar class="avatar-m avatar-dubbed" :avatar="avatar"></app-avatar>
             </div>
             <div class="layout-col content-col">
                 <span>
