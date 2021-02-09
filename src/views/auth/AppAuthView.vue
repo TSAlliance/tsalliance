@@ -114,67 +114,12 @@ section {
     .form-loader {
         margin: $windowPad auto;
     }
-
-    .form-redirect-module {
-        background-color: $colorPrimaryDarker;
-        padding: $boxPad;
-        margin: $windowPad 0 0;
-        border-radius: $borderRadNormal;
-
-        img {
-            border-radius: $borderRadNormal;
-        }
-
-        p {
-            &:first-of-type {
-                text-transform: uppercase;
-                font-size: 0.8em;
-                opacity: 0.5;
-            }
-            &:last-of-type {
-                font-size: 1em;
-                font-weight: 500;
-            }
-        }
-
-        .layout-col {
-            float: left;
-            text-align: left;
-            vertical-align: middle;
-            padding-left: 0.8em;
-
-            &:first-of-type {
-                padding-left: 0;
-            }
-
-            &:last-of-type {
-                text-align: right;
-                float: right;
-                width: 150px;
-            }
-        }
-    }
 }
 
 @media screen and (max-width: 540px) {
     .form-wrapper {
         width: 100%;
         padding: 1.5em;
-    }
-
-    .form-redirect-module {
-        .action-col {
-            display: block !important;
-            width: 100% !important;
-            margin-top: $boxPad;
-            padding: 0 !important;
-
-            button {
-                width: 100%;
-                margin: 0;
-                text-align: center;
-            }
-        }
     }
 }
 </style>

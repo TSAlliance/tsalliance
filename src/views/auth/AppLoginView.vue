@@ -4,25 +4,6 @@
             <h4>Willkommen zurück!</h4>
             <p>Bevor du loslegen kannst, melde dich bitte an.</p>
         </div>
-        
-        <div class="form-redirect-module" v-if="shouldRedirect && !loading && module">
-            <div class="layout-table">
-                <div class="layout-col">
-                    <img class="icon-l" :src="module.getAvatarUrl()" alt="">
-                </div>
-                <div class="layout-col">
-                    <span>
-                        <p>Anmeldung bei</p>
-                        <p>{{ module?.name }}</p>
-                    </span>
-                </div>
-                <div class="layout-col action-col">
-                    <span class="cancel-button">
-                        <app-button class="btn btn-primary btn-m" @click="cancelRedirect">Abbrechen</app-button>
-                    </span>
-                </div>
-            </div>
-        </div>
 
         <div class="form-message" v-if="!loading && shouldRedirect && !module || error">
             <div class="message-box message-error" v-if="!loading && shouldRedirect && !module">
@@ -36,33 +17,21 @@
         
         <div class="form-content" v-if="loading || formIsReady">
             <app-loader class="form-loader" v-if="loading"></app-loader>
-            <!-- Show field if user is logged in to proceed with current account -->
-            <div v-if="$store.state.account.isLoggedIn && shouldRedirect">
-                <div class="form-redirect-module">
-                    <div class="layout-table">
-                        <div class="layout-col">
-                            <app-avatar :avatarHash="$store.state.account.avatar" class="avatar-l"></app-avatar>
-                        </div>
-                        <div class="layout-col">
-                            <span>
-                                <p>Angemeldet als</p>
-                                <p>{{ $store.state.account.name }}</p>
-                            </span>
-                        </div>
-                        <div class="layout-col action-col">
-                            <span class="cancel-button">
-                                <app-button class="btn btn-primary btn-m" @click="logout">Abmelden</app-button>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group" v-if="$store.state.account.isLoggedIn">
-                    <app-button id="btn-submit" class="btn btn-full btn-primary btn-m btn-text-center" @clicked="submit">Jetzt fortfahren</app-button>
-                </div>
-            </div>
+
+            <app-auth-module :avatar="module.avatar" v-if="shouldRedirect && !loading && module">
+                <template #title>Anmelden bei</template>
+                <template #content>{{ module?.name }}</template>
+                <template #action><app-button class="btn btn-primary btn-m" @click="cancelRedirect">Abbrechen</app-button></template>
+            </app-auth-module>
+
+            <app-auth-module :avatar="$store.state.account.avatar" v-if="$store.state.account.isLoggedIn && shouldRedirect">
+                <template #title>Angemeldet als</template>
+                <template #content>{{ $store.state.account.name }}</template>
+                <template #action><app-button class="btn btn-primary btn-m" @click="logout">Abmelden</app-button></template>
+            </app-auth-module>
             
             <!-- Show form if user is logged out -->
-            <div class="form-container" v-else-if="formIsReady">
+            <div class="form-container" v-if="formIsReady && !($store.state.account.isLoggedIn && shouldRedirect)">
                 <div :class="{ 'form-group': true, 'form-error': vuelidate.username.$error }">
                     <label for="input_username">Benutzername</label>
                     <input id="input_username" type="text" class="editmode" v-model="vuelidate.username.$model" @input="vuelidate.username.$touch()">
@@ -81,9 +50,10 @@
                     </ul>
                 </div>
                 <hr>
-                <div class="form-group">
-                    <app-button id="btn-submit" class="btn btn-full btn-primary btn-m btn-text-center" @clicked="submit">Jetzt anmelden</app-button>
-                </div>
+            </div>
+
+            <div class="form-group">
+                <app-button id="btn-submit" class="btn btn-full btn-primary btn-m btn-text-center" @clicked="submit">Anmelden</app-button>
             </div>
         </div>
         <div class="form-footer" v-if="!shouldRedirect">
@@ -99,8 +69,10 @@ import { Account } from '@/models/account'
 
 import useVuelidate from '@vuelidate/core';
 import { required } from '@vuelidate/validators'
+import AppAuthModule from '../../components/items/AppAuthModuleItem.vue';
 
 export default {
+  components: { AppAuthModule },
     setup() {
         return { vuelidate: useVuelidate() }
     },
@@ -131,7 +103,7 @@ export default {
             let query = Object.assign({}, this.$route.query)
             this.redirect = query.redirect || undefined
             delete query.redirect
-            this.$router.replace({query})
+            //this.$router.replace({query})
         },
         cancelRedirect() {
             this.redirectToModule(false)
@@ -220,7 +192,3 @@ export default {
     }
 }
 </script>
-
-<style lang="scss" scoped>
-@import "@/assets/scss/_variables.scss";
-</style>
