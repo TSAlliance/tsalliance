@@ -2,7 +2,7 @@ export default [
     {
         name: "TSRadio",
         banner: require("@/assets/images/services/tsradio.jpeg"),
-        url: "https://tsradio.live"
+        url: "https://radio.tsalliance.eu"
     },
     {
         name: "TSMedia",

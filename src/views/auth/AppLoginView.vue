@@ -103,7 +103,7 @@ export default {
             let query = Object.assign({}, this.$route.query)
             this.redirect = query.redirect || undefined
             delete query.redirect
-            //this.$router.replace({query})
+            this.$router.replace({query})
         },
         cancelRedirect() {
             this.redirectToModule(false)
