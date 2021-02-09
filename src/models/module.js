@@ -22,7 +22,7 @@ export class Module {
         const result = await Api.getInstance().get("/modules/"+moduleId)
 
         if(result.statusCode == 200) {
-            return new Module(result.data["moduleId"], result.data["name"], result.data["url"], result.data["avatar"])
+            return new Module(result.data["uuid"], result.data["name"], result.data["url"], result.data["avatar"])
         } else {
             return new TrustedError(result.statusCode, result.errorId, result.message, result.processId, result.timestamp)
         }
@@ -38,7 +38,7 @@ export class Module {
             const list = []
 
             for(const module of result.entries){
-                list.push(new Module(module["moduleId"], module["name"], module["url"], module["avatar"]))
+                list.push(new Module(module["uuid"], module["name"], module["url"], module["avatar"]))
             }
 
             return list
