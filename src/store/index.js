@@ -30,8 +30,11 @@ const store = createStore({
         avatarBaseUrl,
         apiBaseUrl,
         account: dummyAccount,
-        appIsReady: false,
-        appRequiresAuth: false
+        app: {
+            appIsReady: false,
+            appRequiresAuth: false,
+            showModal: false
+        }
     },
     mutations: {
         updateAccount(state, payload) {
@@ -52,8 +55,11 @@ const store = createStore({
                 store.config = config
                 store.avatarBaseUrl = avatarBaseUrl
                 store.apiBaseUrl = apiBaseUrl
-                store.appIsReady = false
-                store.appRequiresAuth = false
+                store.app = {
+                    appIsReady: false,
+                    appRequiresAuth: false,
+                    showModal: false
+                }
 
                 if (store.version == version) {
                     this.replaceState(Object.assign(state, store))

@@ -1,5 +1,5 @@
 <template>
-    <div class="app-loader" v-if="!$store.state.appIsReady && $store.state.appRequiresAuth">
+    <div class="app-loader" v-if="!$store.state.app.appIsReady && $store.state.app.appRequiresAuth">
         <div class="app-loader-wrapper">
             <img class="icon icon-l" src="@/assets/images/branding/ts_logo.svg">
             

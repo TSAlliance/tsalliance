@@ -10,25 +10,25 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   if(to.meta?.requiresAuth) {
-    store.state.appRequiresAuth = true
-    store.state.appIsReady = false
+    store.state.app.appRequiresAuth = true
+    store.state.app.appIsReady = false
 
     if(!store.state.account.isLoggedIn) {
       next({name: 'authIndex'})
-      store.state.appIsReady = true
+      store.state.app.appIsReady = true
     } else {
       Account.verifySession().then((isVerified) => {
         if(!isVerified) {
           router.push({name: 'authIndex'})
         } 
       }).finally(() => {
-        store.state.appIsReady = true
+        store.state.app.appIsReady = true
       })
       next()
     }
     
   } else {
-    store.state.appIsReady = true
+    store.state.app.appIsReady = true
     next()
   }
 
