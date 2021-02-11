@@ -23,18 +23,23 @@ const dummyAccount = {
     avatarUrl: undefined
 }
 
+const dummyState = {
+    config,
+    version: version,
+    avatarBaseUrl,
+    apiBaseUrl,
+    account: dummyAccount,
+    modals: [],
+    app: {
+        appIsReady: false,
+        appRequiresAuth: false,
+        showModal: false
+    }
+}
+
 const store = createStore({
     state: {
-        config,
-        version: version,
-        avatarBaseUrl,
-        apiBaseUrl,
-        account: dummyAccount,
-        app: {
-            appIsReady: false,
-            appRequiresAuth: false,
-            showModal: false
-        }
+        ...dummyState
     },
     mutations: {
         updateAccount(state, payload) {
@@ -51,14 +56,9 @@ const store = createStore({
         },
         initialiseStore(state) {
             if (localStorage.getItem(localStorageName)) {
-                const store = JSON.parse(localStorage.getItem(localStorageName))
-                store.config = config
-                store.avatarBaseUrl = avatarBaseUrl
-                store.apiBaseUrl = apiBaseUrl
-                store.app = {
-                    appIsReady: false,
-                    appRequiresAuth: false,
-                    showModal: false
+                const store = {
+                    ...dummyState,
+                    ...JSON.parse(localStorage.getItem(localStorageName))
                 }
 
                 if (store.version == version) {
