@@ -49,6 +49,19 @@ export class Modal {
         })
     }
 
+    static async showMessage(title, message, onPositive = undefined) {
+        const component = (await import("@/modals/AppMessageModal.vue"))
+        this.mountModal({
+            component: component?.default,
+            content: {
+                title,
+                message,
+                onPositive
+            },
+            uuid: generateId(6)
+        })
+    }
+
     static async mountModal(modal) {
         store.state.app.showModal = true
         store.state.modals.push(modal)

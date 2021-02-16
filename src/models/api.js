@@ -2,15 +2,12 @@ import axios from 'axios'
 import store from '@/store'
 import router from '@/router'
 import { Account } from '@/models/account.js'
+import { Modal } from '@/models/modal.js'
 
 export class Api {
 
     constructor() {
         axios.defaults.baseURL = this.getApiUrl()
-        /*axios.interceptors.request.use((config) => {
-            config.headers.Authorization = store.state.account.session
-            return config
-        })*/
     }
 
     /**
@@ -106,16 +103,15 @@ export class Api {
                 || trustedError.errorId == "UNKNOWN_AUTH_METHOD" 
                 || trustedError.errorId == "AUTH_REQUIRED"
                 || trustedError.errorId == "UNKNOWN_AUTH_METHOD") {
-                // TODO: Show popup showing that session is expired
+
                 if(router.currentRoute.name != 'home') router.push({ name: 'home' })
                 Account.logout(true)
-                console.log("TODO: Session expired")
+                Modal.showMessage('Sitzung abgelaufen', 'Deine Sitzung ist abgelaufen. Du musst dich erneut anmelden, um fortzufahren.')
             }
             if(trustedError.errorId == "INVALID_ACCOUNT" ) {
-                // TODO: Show popup showing that account does not exist anymore
                 if(router.currentRoute.name != 'home') router.push({ name: 'home' })
                 Account.logout(true)
-                console.log("TODO: Acount blocked")
+                Modal.showMessage('Konto gesperrt', 'Deine Sitzung wurde geschlossen, da dein Konto aus verschiedenen Gründen gesperrt oder gelöscht wurde.')
             }
         }
 
