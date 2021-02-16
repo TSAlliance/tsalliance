@@ -7,7 +7,6 @@
     z-index: 10000000000;
 }
 
-
 .modal-overlay {
     @include absolutePosition;
     width: 100%;
@@ -33,7 +32,7 @@
     opacity: 1;
     width: 100%;
     height: 100%;
-    
+    padding: $windowPad;
 
     &.hidden {
         opacity: 0;
@@ -45,9 +44,53 @@
 .modal-container {
     position: absolute;
     display: inline-block;
-
     top: 50%;
     left: 50%;
-
     transform: translate(-50%,-50%) scale(1);
+}
+
+.modal {
+    display: inline-block;
+    position: relative;
+    min-width: 650px;
+
+    background-color: $colorPrimaryDark;
+    border-radius: $borderRadNormal;
+    overflow: hidden;
+
+    .modal-section {
+        display: block;
+        width: 100%;
+        padding: $boxPad;
+    }
+
+    .modal-header {
+        font-size: 1.1em;
+        font-family: 'Whitney', sans-serif;
+        font-weight: 500;
+        letter-spacing: 0.5px;
+        opacity: 0.8;
+        padding: $boxPad;
+
+        background-color: $colorPrimary;
+        border-bottom: 1px solid $colorPlaceholder;
+    }
+
+    .modal-scroll-area {
+        display: inline-block;
+        padding: 0 $windowPad;
+        overflow-y: auto;
+
+        .modal-content {
+            display: inline-block;
+            width: 100%;
+            padding: $boxPad 0;
+            font-weight: 400 !important;
+        }
+    }
+
+    .modal-footer {
+        background-color: $colorPrimary;
+        border-top: 2px solid $colorPlaceholder;
+    }
 }

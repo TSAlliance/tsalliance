@@ -3,7 +3,13 @@ import { generateId } from '@/utils/generatorUtil'
 
 export class Modal {
 
-    static dismiss() {
+    static dismiss(event = undefined) {
+        if(event) {
+            if(event.target.id != "modal-wrapper") {
+                return
+            }
+        }
+
         let lastIndex = store.state.modals?.length - 1
         store.state.modals?.splice(lastIndex, 1)
 
@@ -14,12 +20,30 @@ export class Modal {
         }
     }
 
-    static async showInfoModal(message) {
+    static async showInfoModal(message, title = undefined, onPositive = undefined, onNegative = undefined) {
         const component = (await import("@/modals/AppInfoModal.vue"))
         this.mountModal({
             component: component?.default,
             content: {
-                message
+                message,
+                title,
+                onPositive,
+                onNegative
+            },
+            uuid: generateId(6)
+        })
+    }
+
+    static async showConfirmModal(value, onPositive = undefined, onNegative = undefined) {
+        const component = (await import("@/modals/AppConfirmModal.vue"))
+        this.mountModal({
+            component: component?.default,
+            content: {
+                title: "Bestätigung erforderlich",
+                message: "Um mit der Aktion fortzufahren musst du erst den Vorgang bestätigen. Schreibe hierzu folgendes in das Eingabefeld:",
+                value,
+                onPositive,
+                onNegative
             },
             uuid: generateId(6)
         })

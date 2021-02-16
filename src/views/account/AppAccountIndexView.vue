@@ -2,14 +2,11 @@
     <section>
         <h3 class="title">Mein Konto</h3>
         
+        <button @click="$modal.showInfoModal('Testmodal', 'Das ist ein Titel')">Testmodal</button>
         <div class="section-box">
             <div class="layout-table">
                 <div class="layout-col">
-
                     <app-avatar-changable :avatar="$store.state.account.avatar" class="avatar-xxl avatar-dubbed"></app-avatar-changable>
-                    <!--<span><img class="icon icon-xs" src="@/assets/icons/upload.svg" alt=""></span>
-                    
-                    <img id="user_avatar" :src="$store.state.account.avatarUrl" alt="">-->
                 </div>
                 <div class="layout-col">
                     <div class="profile-info">

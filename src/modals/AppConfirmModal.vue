@@ -5,6 +5,12 @@
         </template>
         <template #content>
             <p>{{ content?.message }}</p>
+            <p><b>{{ content?.value }}</b></p>
+            <br>
+
+            <div class="form-group">
+                <input class="editmode" type="text" name="input_value" id="input_value">
+            </div>
         </template>
         <template #footer>
             <button class="btn btn-primary btn-tertiary btn-m" @click="executeNegativeCallback">Abbrechen</button>
@@ -48,3 +54,7 @@ export default {
     }
 }
 </script>
+
+<style lang="scss">
+@import "@/assets/scss/elements/forms.scss";
+</style>

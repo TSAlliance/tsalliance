@@ -278,12 +278,12 @@ $buttonIconScales: (
     color: $colorWhite;
     border: 1px solid transparent;
 
-    &:hover, &:focus {
+    &:hover {
         color: $colorAccent;
     }
 
-
-    &:focus {
+    &:hover, &:focus {
         outline: none;
+        background: none;
     }
 } 

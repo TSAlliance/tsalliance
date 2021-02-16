@@ -7,7 +7,6 @@
             <p>{{ content?.message }}</p>
         </template>
         <template #footer>
-            <button class="btn btn-primary btn-tertiary btn-m" @click="executeNegativeCallback">Abbrechen</button>
             <app-button class="btn btn-primary btn-m" @clicked="executePositiveCallback">OK</app-button>
         </template>
     </app-modal>
@@ -35,13 +34,6 @@ export default {
                 })
             } else {
                 done()
-                this.next()
-            }
-        },
-        executeNegativeCallback() {
-            if(this.content?.onNegative) {
-                this.content.onNegative(this.next)
-            } else {
                 this.next()
             }
         }

@@ -19,6 +19,7 @@ import { generateId } from '@/utils/generatorUtil'
 import AppLoaderComp from '@/components/loader/AppLoaderComp.vue'
 import AppButtonComp from '@/components/button/AppButtonComp.vue'
 import AppAvatarStatic from '@/components/image/AppAvatarStatic.vue'
+import AppModal from '@/modals/AppModal.vue'
 
 // Initialize storage
 store.commit('initialiseStore')
@@ -41,6 +42,7 @@ app.use(VueLottiePlayer)
 app.component('app-button', AppButtonComp)
 app.component('app-loader', AppLoaderComp)
 app.component('app-avatar', AppAvatarStatic)
+app.component('app-modal', AppModal)
 
 // Register global methods
 app.mixin({

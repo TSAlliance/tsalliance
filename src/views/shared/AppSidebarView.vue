@@ -81,10 +81,18 @@ export default {
             window.open(url, '_blank')
         },
         deleteAccount() {
-            console.log('deleteAccount: TODO')
+            this.$modal.showConfirmModal(this.$store.state.account.name, (next) => {
+                console.log("Confirmed")
+                this.$account.deleteMe().finally(() => {
+                    next()
+                })
+            });
         },
         logout() {
-            this.$account.logout(true)
+            this.$modal.showInfoModal("Du bist in Begriff dich abzumelden. Möchtest du wirklich fortfahren?", "Jetzt abmelden?", (next) => {
+                this.$account.logout(true)
+                next()
+            })
         }
     },
     mounted() {
