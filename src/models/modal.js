@@ -5,7 +5,7 @@ export class Modal {
 
     static dismiss(event = undefined) {
         if(event) {
-            if(event.target.id != "modal-wrapper") {
+            if(event.target.id != "modal-wrapper" && !event.target.classList.contains("modal-container")) {
                 return
             }
         }
