@@ -44,15 +44,19 @@
 .modal-container {
     position: absolute;
     display: inline-block;
+    text-align: center;
+
+    width: 100%;
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%) scale(1);
 }
 
 .modal {
+    text-align: left;
     display: inline-block;
     position: relative;
-    min-width: 650px;
+    width: 650px;
 
     background-color: $colorPrimaryDark;
     border-radius: $borderRadNormal;
@@ -90,7 +94,40 @@
     }
 
     .modal-footer {
+        text-align: right;
         background-color: $colorPrimary;
         border-top: 2px solid $colorPlaceholder;
+    }
+}
+
+
+/**
+[]=============================[]
+          Media Query
+[]=============================[]
+*/
+@media screen and (max-width: 750px) {
+    .modal {
+        width: 500px !important;
+    }
+}
+
+@media screen and (max-width: 540px) {
+    .modal-container {
+        padding: 0 $boxPad;
+
+        .modal {
+            width: 100% !important;
+
+            .modal-footer {
+                text-align: left;
+
+                button {
+                    display: block;
+                    width: 100% !important;
+                    text-align: center;
+                }
+            }
+        }
     }
 }
