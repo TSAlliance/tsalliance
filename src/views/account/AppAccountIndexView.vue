@@ -2,7 +2,6 @@
     <section>
         <h3 class="title">Mein Konto</h3>
         
-        <button @click="$modal.showInfoModal('Testmodal', 'Das ist ein Titel')">Testmodal</button>
         <div class="section-box">
             <div class="layout-table">
                 <div class="layout-col">
@@ -134,6 +133,7 @@ function resetForm(form, initForm) {
 
 <style lang="scss" scoped>
 @import "@/assets/scss/_variables.scss";
+@import "@/assets/scss/elements/forms.scss";
 
 .layout-table {
     .layout-col {
