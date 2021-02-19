@@ -62,6 +62,17 @@ export class Modal {
         })
     }
 
+    static async chooseAvatar(onPositive = undefined) {
+        const component = (await import("@/modals/AppChooseAvatarModal.vue"))
+        this.mountModal({
+            component: component?.default,
+            content: {
+                onPositive
+            },
+            uuid: generateId(6)
+        })
+    }
+
     static async mountModal(modal) {
         store.state.app.showModal = true
         store.state.modals.push(modal)

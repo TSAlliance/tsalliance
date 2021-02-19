@@ -1,5 +1,5 @@
 <template>
-    <div class="avatar-changeable-container">
+    <div class="avatar-changeable-container" @click="changeAvatar">
         <app-avatar :avatar="avatar"></app-avatar>
 
         <div class="upload-overlay">
@@ -19,6 +19,13 @@ export default {
         },
         hasText() {
             return !!this.$slots.default
+        }
+    },
+    methods: {
+        changeAvatar() {
+            this.$modal.chooseAvatar((next) => {
+                next
+            })
         }
     }
 }

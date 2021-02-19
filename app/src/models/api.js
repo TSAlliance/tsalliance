@@ -86,6 +86,34 @@ export class Api {
     }
 
     /**
+     * Send a post request to the api to upload a file
+     * @param path Endpoint path
+     * @param file File to upload
+     * @param onProgress Callback for progress updates
+     * @param handleError Defaults to false
+     * @returns {Api.Result} Api Result
+     */
+    async upload(path, file, onProgress = undefined, handleError = false) {
+        const data = new FormData()
+        data.append("file", file)
+
+        return new Promise((resolve) => {
+            axios.request({
+                baseURL: this.getApiUrl(),
+                headers: { 
+                    'Authorization': "Bearer "+store.state.account.session,
+                    'Content-Type': 'multipart/form-data'
+                },
+                data,
+                url: path,
+                method: 'POST',
+                onUploadProgress: onProgress
+            }).then((response) => resolve(this.transformAxiosResponse(response, handleError)))
+            .catch((error) => resolve(this.transformAxiosError(error, handleError)))
+        })
+    }
+
+    /**
      * Transform an axios error to proper api result object
      * @param error axios error
      */

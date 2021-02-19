@@ -18,6 +18,7 @@
 export default {
     data() {
         return {
+            initialHeight: undefined,
             modalId: this.generateId(6)
         }
     },
@@ -42,20 +43,30 @@ export default {
             const windowHeight = (window.innerHeight - (wrapperPad*4))
             let containerHeight = parseFloat(containerElement ? containerElement.getBoundingClientRect().height : 0)
 
-            if(windowHeight <= containerHeight) {
+            if(!this.initialHeight) {
+                this.initialHeight = containerHeight
+            } 
+
+            if(windowHeight <= containerHeight && contentHeight != this.initialHeight) {
                 containerHeight = windowHeight + wrapperPad
                 containerElement.style.height = containerHeight + "px"
+            } else {
+                containerElement.style.height = this.initialHeight + "px"
             }
 
             let headerHeight = parseFloat(headerElement ? headerElement.getBoundingClientRect().height : 0)
             let footerHeight = parseFloat(footerElement ? footerElement.getBoundingClientRect().height : 0)
 
             let contentHeight = containerHeight - headerHeight - footerHeight
-            contentElement.style.maxHeight = contentHeight + 1 + "px"
+            contentElement.style.height = contentHeight + 1 + "px"
         }
     },
     mounted() {
         this.calculateContentHeight()
+        window.addEventListener("resize", this.calculateContentHeight)
+    },
+    unmounted() {
+        window.removeEventListener("resize", this.calculateContentHeight)
     }
 }
 </script>

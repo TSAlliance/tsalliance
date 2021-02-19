@@ -1,8 +1,13 @@
 .DS_Store
 node_modules
-/dist
+*/dist
+*/dist_electron
+*/logs
 package-lock.json
 config.json
+config.js
+config.ts
+*.secret
 
 # local env files
 .env.local

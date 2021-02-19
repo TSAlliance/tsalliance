@@ -124,5 +124,25 @@ export class Account {
     static async registerAccount(username, password, email, invite, handleError = false) {
         return  await Api.getInstance().post("/auth/signup", {name: username, password, email, invite}, handleError)
     }
+
+    /**
+     * Upload new avatar
+     */
+    static async setAvatarMe(file) {
+        return await this.setAvatar("@me", file)
+    }
+
+    /**
+     * Upload new avatar for user
+     * @param {*} uuid 
+     */
+    static async setAvatar(uuid, file) {
+        let result = await Api.getInstance().upload("/avatars/"+uuid, file)
+        if(result instanceof TrustedError) {
+            return result
+        }
+
+        return result.data
+    }
     
 }
