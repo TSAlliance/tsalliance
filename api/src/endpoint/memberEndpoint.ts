@@ -37,12 +37,18 @@ export default class MemberEndpoint extends Endpoint {
     async actionGetOne(route: Router.Route): Promise<Endpoint.Result> {
         let targetUUID = route.params?.["uuid"]
 
+        let roleAttributes = ['uuid', 'name']
+
+        if(route.isOwnResource) {
+            roleAttributes.push("hierarchy", "permissions")
+        }
+
         let member = await Member.findOne({ 
             where: { 
                 uuid: targetUUID 
             }, 
             attributes: ['uuid', 'name', 'createdAt', 'email', 'avatar'],
-            include: { model: Role, as: 'role', attributes: ['uuid', 'name']}
+            include: { model: Role, as: 'role', attributes: roleAttributes}
         })
 
         if(!member) {
