@@ -19,7 +19,7 @@ export default class MemberEndpoint extends Endpoint {
 
     constructor() {
         super(
-            Endpoint.AuthenticationFlag.FLAG_REQUIRED,
+            Endpoint.AuthenticationFlag.FLAG_NO_AUTH,
             [
                 new Endpoint.Permission("getOne", "permission.members.read"),
                 new Endpoint.Permission("getMultiple", "permission.members.read"),
@@ -38,16 +38,18 @@ export default class MemberEndpoint extends Endpoint {
         let targetUUID = route.params?.["uuid"]
 
         let roleAttributes = ['uuid', 'name']
+        let memberAttributes = ['uuid', 'name', 'createdAt', 'avatar']
 
-        if(route.isOwnResource) {
+        if(route.isOwnResource || route.account instanceof Member && route.account.hasPermission("permission.members.read") ) {
             roleAttributes.push("hierarchy", "permissions")
+            memberAttributes.push("email")
         }
 
         let member = await Member.findOne({ 
             where: { 
                 uuid: targetUUID 
             }, 
-            attributes: ['uuid', 'name', 'createdAt', 'email', 'avatar'],
+            attributes: memberAttributes,
             include: { model: Role, as: 'role', attributes: roleAttributes}
         })
 
@@ -68,12 +70,20 @@ export default class MemberEndpoint extends Endpoint {
         if(offset < 0) offset = 0
         if(limit > 30 || limit < 1) limit = 30
 
+        let roleAttributes = ['uuid', 'name']
+        let memberAttributes = ['uuid', 'name', 'createdAt', 'avatar']
+
+        if(route.account instanceof Member && route.account?.hasPermission("permission.members.read") ) {
+            roleAttributes.push("hierarchy", "permissions")
+            memberAttributes.push("email")
+        }
+
         // Specify what to return
         let options = {
             offset,
             limit,
-            attributes: ['uuid', 'name', 'createdAt', 'email', 'avatar'],
-            include: { model: Role, as: 'role', attributes: ['uuid', 'name']}
+            attributes: memberAttributes,
+            include: { model: Role, as: 'role', attributes: roleAttributes}
         }
 
         // Define where clause
