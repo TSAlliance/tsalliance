@@ -122,7 +122,7 @@ export class Member extends Model implements Account {
 
         if(bcrypt.compareSync(password, member.password)) {
             return new Endpoint.ResultSingleton(200, { 
-                token: jwt.sign({ client: { uuid: member.uuid, credentialHash: member.credentialHash }}, CryptUtil.getInstance().getJwtSecret(), {expiresIn: config.app.jwt_expiry+'ms'})
+                token: jwt.sign({ client: { uuid: member.uuid, credentialHash: member.credentialHash }}, CryptUtil.getInstance().getJwtSecret(), {})
             })
         } else {
             return TrustedError.get(TrustedError.Errors.INVALID_CREDENTIALS)
